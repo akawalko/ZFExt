@@ -1,0 +1,23 @@
+{
+    "name": "akawalko/ZFExt",
+    "description": "Library extends the functionality of Zend Framework version 1.12.",
+    "minimum-stability": "stable",
+    "homepage": "https://github.com/akawalko/ZFExt",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arkadiusz Kawałko",
+            "email": "lothar86@o2.pl"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "zf1/zend-db": "1.12.6",
+        "zf1/zend-cache": "1.12.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "ZFExt": "src/"
+        }
+    }
+}
