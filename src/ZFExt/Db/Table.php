@@ -53,7 +53,7 @@ abstract class ZFExt_Db_Table extends Zend_Db_Table_Abstract
             $cacheId .= '__' . preg_replace('#[^a-zA-Z0-9_]#', '_', serialize($methodArguments));
         }
 
-        return $cacheId;
+        return trim($cacheId, '_');
     }
 
     /**
@@ -79,16 +79,37 @@ abstract class ZFExt_Db_Table extends Zend_Db_Table_Abstract
         return false;
     }
 
+    /**
+     * @param string|\Zend_Db_Select    $sql
+     * @param array                     $bind
+     * @param null|mixed                $fetchMode
+     * @param bool                      $useCache
+     * @param string                    $calleeMethodName
+     * @return false|mixed
+     */
     public function loadOne($sql, $bind = array(), $fetchMode = null, $useCache = true, $calleeMethodName = '')
     {
         return $this->_loadFromCacheIfPossible('fetchRow', func_get_args());
     }
 
+    /**
+     * @param string|\Zend_Db_Select    $sql
+     * @param array                     $bind
+     * @param null|mixed                $fetchMode
+     * @param bool                      $useCache
+     * @param string                    $calleeMethodName
+     * @return false|mixed
+     */
     public function loadAll($sql, $bind = array(), $fetchMode = null, $useCache = true, $calleeMethodName = '')
     {
         return $this->_loadFromCacheIfPossible('fetchAll', func_get_args());
     }
 
+    /**
+     * @param $fetchMethod
+     * @param array $args
+     * @return false|mixed
+     */
     protected function _loadFromCacheIfPossible($fetchMethod, array $args)
     {
         $sql = $args[0];
